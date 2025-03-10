@@ -1,0 +1,77 @@
+<!--
+id:number
+     title:string
+     description:string
+     category:string
+     price:number
+     discountPercentage:number
+     rating:number
+     stock:number
+     image:string
+-->
+
+
+<h1>{{inpname.errors|json}}</h1>
+<form (ngSubmit)="Addproduct()" #inpForm="ngForm">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Product ID</label>
+        <input type="number" class="form-control" name="id" [(ngModel)]="product.id" #inpname="ngModel" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inpname.valid || inpname.untouched">
+        Product ID is required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Product Title</label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="product.title" #inptitle="ngModel"required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inptitle.valid || inptitle.untouched">
+        Product Title required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Product description</label>
+        <input type="text" class="form-control" name="description" #inpdes="ngModel"  [(ngModel)]="product.description" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inpdes.valid || inpdes.untouched">
+        Product description required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Catergory name</label>
+        <input type="text" class="form-control" name="category"  [(ngModel)]="product.category" #inpcat="ngModel" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inpcat.valid || inpcat.untouched">
+        Catergory name required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">price</label>
+        <input type="number" class="form-control" name="price" [(ngModel)]="product.price" #inppr="ngModel" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inppr.valid || inppr.untouched">
+        Price required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">discountPercentage</label>
+        <input type="text" class="form-control" name="discountPercentage" #inpdis="ngModel" [(ngModel)]="product.discountPercentage" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inpdis.valid || inpdis.untouched">
+        Discount required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">rating</label>
+        <input type="text" class="form-control" name=">rating" #inprat="ngModel" [(ngModel)]="product.rating" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inprat.valid || inprat.untouched">
+        Rating required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">stock</label>
+        <input type="text" class="form-control" name="stock" #inpst="ngModel" [(ngModel)]="product.stock" required>
+    </div>
+    <small class="alert alert-danger" [hidden]="inpst.valid || inpst.untouched">
+        Stock required.
+    </small>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">image</label>
+        <input type="file" class="form-control w-75" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+    <button class="btn btn-dark w-100" [disabled]="inpForm.invalid">Submit</button>
+</form>

@@ -1,0 +1,86 @@
+
+<div class="row">
+@for (item of filteredList;track item.id)
+{
+        <div appShadow class="card col-4 m-1" style="width: 18rem;">
+          <img [src]="item.image" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{item.title|uppercase}}</h5>
+            <p class="card-text">{{item.description|sliceWords:11}}</p>
+            <p class="card-text">Price:{{item.price}}</p>
+            <p class="card-text" [ngClass]="{'bg-danger':item.stock==0,'bg-warning':item.stock==1}">Quantity:{{item.stock}}</p>
+            <input type="number" [max]="item.stock" min="1" value="0" class="small-input ms-2" #q [disabled]="item.stock==0">
+            <app-button-component (action)="calculatePrice(q.value,item)"></app-button-component>
+            <br>
+            <div class="d-flex justify-content-between mt-3">
+              <a (click)="openPopup(item)">
+                <fa-icon [icon]="faEdit" class="text-warning fa-2x"></fa-icon>
+              </a>
+              <fa-icon [icon]="faTrash" (click)="delelteProduct(item.id)" class="text-danger fa-2x"></fa-icon>
+              <a [routerLink]="['/products',item.id]"><fa-icon [icon]="faInfoCircle" class="text-info fa-2x"></fa-icon></a>
+            </div>
+          </div>
+      </div>   
+}
+</div>
+<h3>Total Price:{{productPrice}}</h3>
+@if (isPopupOpen)
+{
+    <div class="custom-modal">
+      <div class="modal-body">
+        <form class="mx-4">
+          <div class="mb-3">
+              <label class="form-label">Product ID</label>
+              <input type="number" class="form-control" name="id" [(ngModel)]="selectedProduct.id" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Product Title</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="selectedProduct.title" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Product Description</label>
+              <input type="text" class="form-control" name="description" [(ngModel)]="selectedProduct.description" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Category Name</label>
+              <input type="text" class="form-control" name="category" [(ngModel)]="selectedProduct.category" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" name="price" [(ngModel)]="selectedProduct.price" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Discount Percentage</label>
+              <input type="text" class="form-control" name="discountPercentage" [(ngModel)]="selectedProduct.discountPercentage" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Rating</label>
+              <input type="text" class="form-control" name="rating" [(ngModel)]="selectedProduct.rating" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Stock</label>
+              <input type="text" class="form-control" name="stock" [(ngModel)]="selectedProduct.stock" required>
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Image</label>
+              <div class="d-flex align-items-center gap-2">
+                <input type="file" class="form-control mb-2" (change)="onFileSelected($event)" accept="image/*">
+                <img [src]="selectedProduct.image" width="50" height="50" class="rounded border">
+              </div>
+              
+          </div>
+
+          <button class="btn btn-dark w-100" (click)="Productupdated(selectedProduct.id)">Submit</button>
+          <button type="button" class="btn btn-danger w-100 mt-2" (click)="closePopup()">Close</button>
+        </form>
+      </div>
+    </div>
+}

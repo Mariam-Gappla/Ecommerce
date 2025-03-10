@@ -1,0 +1,34 @@
+export class Product {
+     id:number
+     title:string
+     description:string
+     category:string
+     price:number
+     discountPercentage:number
+     rating:number
+     stock:number
+     image:string
+constructor(
+    _id:number,
+    _title:string,
+    _description:string,
+    _category:string,
+    _price:number,
+    _discountPercentage:number,
+    _rating:number,
+    _stock:number,
+    _image:string
+)
+{
+    this.id=_id;
+    this.title=_title;
+    this.description=_description;
+    this.category=_category;
+    this.price=_price;
+    this.discountPercentage=_discountPercentage;
+    this.rating=_rating;
+    this.stock=_stock;
+    this.image=_image
+
+}
+}
