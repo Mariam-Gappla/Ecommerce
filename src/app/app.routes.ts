@@ -4,11 +4,13 @@ import { LandingComponent } from './landinComponent/landing/landing.component';
 import { ErrorComponent } from './errorComponent/error/error.component';
 import { ProductDetailsComponent } from './productdetails/product-details/product-details.component';
 import { FormsComponent } from './formsComponent/forms/forms.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 export const routes: Routes = [
     {path:"",component:LandingComponent},
     {path:"products",component:MasterMainContentComponentComponent},
     {path:"products/:id",component:ProductDetailsComponent},
     {path:"addproduct",component:FormsComponent},
+    {path:"SignUp",component:SignUpComponent},
     {path:"**",component:ErrorComponent},
 ];
