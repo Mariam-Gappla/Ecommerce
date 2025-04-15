@@ -1,67 +1,89 @@
-<form [formGroup]="userRegister" (ngSubmit)="sendRegister()">
-    <div class="mb-3">
-        <label for="FormControlInput1" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="FormControlInput1" placeholder="Full Name" formControlName="FullName">
+<div class=" w-full flex items-center m-auto mt-10 ">
+  <div class="bg-slate-800 flex items-center text-white mx-auto p-4 rounded-2xl">
+    <form [formGroup]="userRegister" (ngSubmit)="userid ? update():sendRegister()" >
+      <div>
+        <label for="FormControlInput1">Full Name</label><br>
+        <input type="text" class="w-xl"  id="FormControlInput1" placeholder="Full Name" formControlName="FullName"><br>
         <small [hidden]="FullName?.untouched || FullName?.valid" class="text-danger">required</small>
-    </div>
-    <div class="mb-3">
-        <label for="FormControlInput2" class="form-label">Email</label>
-        <input type="email" class="form-control" id="FormControlInput2" placeholder="Email" formControlName="Email">
+      </div>
+      <div class="mb-3">
+        <label for="FormControlInput2" class="form-label">Email</label><br>
+        <input type="email" class="w-[98%]" id="FormControlInput2" placeholder="Email" formControlName="Email"><br>
         <div [hidden]="Email?.valid || Email?.untouched">
-          <small [hidden]="!Email?.errors?.['required']" class="text-danger">required</small>
-          <small [hidden]="!Email?.errors?.['pattern']" class="text-danger">should be example&#64;gmail.com and value is {{Email?.errors?.['pattern']?.actualValue}}</small>
+          <small [hidden]="!Email?.errors?.['required']">required</small>
+          <small [hidden]="!Email?.errors?.['pattern']">should be example&#64;gmail.com and value is
+            {{Email?.errors?.['pattern']?.actualValue}}</small>
         </div>
-        <small [hidden]="!(userRegister.errors?.['exist'])" class="text-danger">
+        <small [hidden]="!(userRegister.errors?.['exist'])">
           {{userRegister.errors?.['exist']?.email | json}}
         </small>
       </div>
       <div class="mb-3">
-        <label for="FormControlInput3" class="form-label">Age</label>
-        <input type="number" class="form-control" id="FormControlInput3" placeholder="Age" formControlName="Age">
+        <label for="FormControlInput3" class="form-label">Age</label><br>
+        <input type="number" class="w-[98%]" id="FormControlInput3" placeholder="Age" formControlName="Age"><br>
         <small [hidden]="Age?.untouched || Age?.valid" class="text-danger">required</small>
       </div>
       <div formGroupName="address">
         <div class="mb-3">
-          <label for="FormControlInput4" class="form-label">street</label>
-          <input type="text" class="form-control" id="FormControlInput4" placeholder="street" formControlName="street">
+          <label for="FormControlInput4" class="form-label">street</label><br>
+          <input type="text" class="w-[98%]" id="FormControlInput4" placeholder="street" formControlName="street"><br>
           <small [hidden]="street?.untouched || street?.valid" class="text-danger">required</small>
         </div>
         <div class="mb-3">
-          <label for="FormControlInput5" class="form-label">city</label>
-          <input type="text" class="form-control" id="FormControlInput5" placeholder="code" formControlName="city">
+          <label for="FormControlInput5" class="form-label">city</label><br>
+          <input type="text" class="w-[98%]" id="FormControlInput5" placeholder="code" formControlName="city"><br>
           <small [hidden]="city?.untouched || city?.valid" class="text-danger">required</small>
         </div>
       </div>
       <div class="mb-3">
-        <input type="radio" class="btn-check" id="btn-check-socail" name="referral" autocomplete="off" value="social" formControlName="referral" (change)="updateRefferalOthers()"> 
+        <input type="radio" class="btn-check" id="btn-check-socail" name="referral" autocomplete="off" value="social"
+          formControlName="referral" (change)="updateRefferalOthers()">
         <label class="btn btn-outline-primary" for="btn-check-socail">socail</label>
-        <input type="radio" class="btn-check" id="btn-check-media" name="referral" autocomplete="off" value="media" formControlName="referral" (change)="updateRefferalOthers()">
+        <span class="ml-4"></span>
+        <input type="radio" class="btn-check" id="btn-check-media" name="referral" autocomplete="off" value="media"
+          formControlName="referral" (change)="updateRefferalOthers()">
         <label class="btn btn-outline-primary" for="btn-check-media">media</label>
-        <input type="radio" class="btn-check" id="btn-check-other" name="referral" autocomplete="off" value="others" formControlName="referral" (change)="updateRefferalOthers()">
+        <span class="ml-4"></span>
+        <input type="radio" class="btn-check" id="btn-check-other" name="referral" autocomplete="off" value="others"
+          formControlName="referral" (change)="updateRefferalOthers()">
         <label class="btn btn-outline-primary" for="btn-check-other">others</label>
       </div>
       @if(userRegister.get('referral')?.value==="others")
       {
-        <input type="text" class="form-control" id="FormControlInput6" placeholder="others" formControlName="referralothers">
-        @if(Refferal?.touched && Refferal?.invalid)
-        {
-          <small class="text-danger">required</small>
-        }
+      <input type="text" class="w-90" id="FormControlInput6" placeholder="others"
+        formControlName="referralothers">
+      @if(Refferal?.touched && Refferal?.invalid)
+      {
+      <small class="text-danger">required</small>
+      }
       }
       <div class="mb-3">
-        <label for="FormControlInput6" class="form-label">Password</label>
-        <input type="password" class="form-control" id="FormControlInput6" placeholder="Password" formControlName="Password">
+        <label for="FormControlInput6" class="form-label">Password</label><br>
+        <input type="password" class="w-[98%]" id="FormControlInput6" placeholder="Password"
+          formControlName="Password"><br>
         <small [hidden]="Password?.untouched || Password?.valid" class="text-danger">required</small>
       </div>
       <div class="mb-3">
-        <label for="FormControlInput7" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="FormControlInput7" placeholder="Confirm Password" formControlName="ConfirmPassword">
+        <label for="FormControlInput7" class="form-label">Confirm Password</label><br>
+        <input type="password" class="w-[98%]" id="FormControlInput7" placeholder="Confirm Password"
+          formControlName="ConfirmPassword"><br>
         <div [hidden]="(ConfirmPassword?.untouched) && !(userRegister.errors?.['unmatched'])">
-          <small [hidden]="!(userRegister.errors?.['unmatched'])" class="text-danger">{{ userRegister.errors?.['unmatched'] }}</small>
-          <small [hidden]="!(ConfirmPassword?.errors?.['required']) || ConfirmPassword?.valid " class="text-danger">Required</small>
+          <small [hidden]="!(userRegister.errors?.['unmatched'])" class="text-danger">{{
+            userRegister.errors?.['unmatched'] }}</small>
+          <small [hidden]="!(ConfirmPassword?.errors?.['required']) || ConfirmPassword?.valid "
+           >Required</small>
         </div>
-        
       </div>
-    
-      <button class="btn btn-dark w-100" [disabled]="userRegister.invalid">Submit</button>
-</form>
+      <div>
+        <label class="form-check-label" for="flexRadioDefault2">Role:</label>
+        <input type="radio" name="role" class="ml-4" id="flexRadioDefault2" formControlName="role" value="user">User
+        <span class="ml-4"></span>
+        <input type="radio" name="role" formControlName="role" value="admin">Admin
+      </div>
+
+      <div>
+        <button class="bg-white w-[100%] rounded-xl hover:bg-slate-400 mt-3 text-slate-800" [disabled]="userRegister.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

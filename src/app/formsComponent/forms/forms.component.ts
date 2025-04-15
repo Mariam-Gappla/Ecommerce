@@ -1,34 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StaticDataService } from '../../Services/static-data.service';
 import { Product } from '../../Models/productModel/product';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { DynamicDataService } from '../../Services/dynamic-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-forms',
-  imports: [FormsModule,JsonPipe],
+  imports: [FormsModule,HttpClientModule],
+  providers:[DynamicDataService],
   templateUrl: './forms.component.html',
-  styleUrl: './forms.component.css'
+  styleUrl: './forms.component.css',
+  standalone:true
 })
-export class FormsComponent {
-  productlength:number=0
-  product:Product={} as Product
-constructor(private data:StaticDataService)
+export class FormsComponent implements OnInit{
+  productlength:number=0;
+  selectedItem:number=0;
+  product:any={}
+constructor(private dynamicData:DynamicDataService,private router:Router,private activeRoute:ActivatedRoute)
 {
-this.productlength=data.prdList.length+1
+this.selectedItem=Number(activeRoute.snapshot.paramMap.get('id'));
 }
-onFileSelected(event:any){
-const input=event.target as HTMLInputElement;
-const file=input.files![0];
-const reader=new FileReader();
-reader.onload=()=>{
-  this.product.image=reader.result as string;
+ngOnInit(): void {
+  if(this.selectedItem)
+    {
+      this.dynamicData.getProductById(this.selectedItem).subscribe(prd=>{
+        this.product=prd
+      })
+    } 
 }
-reader.readAsDataURL(file)
+onFileSelected(event: any) {
+  const file = event.target.files[0];
+
+  if (file) {
+    const file = event.target.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = () => {
+    this.product.thumbnail  = reader.result as string; 
+  };
+
+  reader.readAsDataURL(file);
+  }
+}
+Edit()
+{
+  console.log(this.product)
+  this.dynamicData.updateProduct(this.selectedItem,this.product).subscribe((pro)=>{
+    this.router.navigate(['/products'])
+  })
 }
 Addproduct()
 {
-  console.log(this.product)
-  this.data.postProduct(this.product!)
+  this.dynamicData.addProduct(this.product).subscribe((prd)=>{
+  this.router.navigate(['/products'])
+  });
 }
+
+
+
 }

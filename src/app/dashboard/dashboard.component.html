@@ -1,0 +1,28 @@
+<div class="w-full  min-h-screen">
+  <div class="h-[80%] w-full">
+    <table class="w-full">
+      <thead>
+        <tr class="border-b-1 border-black">
+          <th scope="col">#</th>
+          <th scope="col">username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(user of allUsers;track user)
+        {   
+            <tr>
+                <th class="text-center">{{user.id}}</th>
+                <td class="text-center">{{user.FullName}}</td>
+                <td class="text-center">{{user.Email}}</td>
+                <td class="text-center">{{user.Age}}</td>
+                <td class="text-center"><button class="bg-slate-800 text-white mt-3 w-20 h-7 rounded-2xl" (click)="deleteUser(user.id)">Delete</button></td>
+            </tr>
+        }
+        
+      </tbody>
+    </table>
+  </div>
+</div>

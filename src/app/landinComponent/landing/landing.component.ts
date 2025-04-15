@@ -1,15 +1,18 @@
+import { HttpClientJsonpModule } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { DynamicDataService } from '../../Services/dynamic-data.service';
 
 @Component({
   selector: 'app-landing',
-  imports: [],
+  imports: [HttpClientJsonpModule],
+  providers:[DynamicDataService],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css',
   standalone: true
 })
 export class LandingComponent {
 images:string[];
-constructor()
+constructor( private products:DynamicDataService)
 {
   this.images=[
     "1.PNG",
@@ -20,6 +23,7 @@ constructor()
 }
 currentIndex:number=0;
 intervalId:any
+prd:any[]=[]
 displayPre() {
   console.log(this.currentIndex);
   if (this.currentIndex>=0) {

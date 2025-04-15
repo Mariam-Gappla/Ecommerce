@@ -1,8 +1,19 @@
-<select class="form-select" [(ngModel)]="selectedItem">
-    <option [value]="category[0].name">beauty</option>
-    <option [value]="category[1].name">fragrances</option>
-    <option [value]="category[2].name">furniture</option>
-  </select>
-  <div class="row mx-1">
+<div class="flex gap-4 justify-center my-4">
+  <div class="w-50 py-1.5 bg-blue-500 text-white cursor-pointer text-center rounded-xl" (click)="handleClick('beauty')">
+    beauty
+  </div>
+
+  <div class="w-50 py-1.5 bg-green-500 text-white cursor-pointer text-center rounded-xl" (click)="handleClick('fragrances')">
+    fragrances
+  </div>
+
+  <div class="w-50 py-1.5 bg-red-500 text-white cursor-pointer text-center rounded-xl" (click)="handleClick('furniture')">
+    furniture
+  </div>
+
+  <div class="w-50 py-1.5 bg-yellow-500 text-white cursor-pointer text-center rounded-xl" (click)="handleClick('groceries')">
+    groceries
+  </div>
+</div>
 <app-main-content [recivedid]="selectedItem"></app-main-content>
 

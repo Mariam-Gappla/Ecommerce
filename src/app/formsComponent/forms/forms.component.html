@@ -1,77 +1,74 @@
-<!--
-id:number
-     title:string
-     description:string
-     category:string
-     price:number
-     discountPercentage:number
-     rating:number
-     stock:number
-     image:string
--->
 
-
-<h1>{{inpname.errors|json}}</h1>
-<form (ngSubmit)="Addproduct()" #inpForm="ngForm">
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Product ID</label>
-        <input type="number" class="form-control" name="id" [(ngModel)]="product.id" #inpname="ngModel" required>
+<div class="bg-slate-800 text-white pt-6">
+    <div class="flex justify-center">
+        <form (ngSubmit)="selectedItem?Edit():Addproduct()" #inpForm="ngForm">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1">Product Title</label><br>
+                <input type="text" class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl pl-4" name="title" [(ngModel)]="product.title" #inptitle="ngModel"required ><br>
+            </div>
+            <small class="alert alert-danger" [hidden]="inptitle.valid || inptitle.untouched">
+                Product Title required.
+            </small>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Product description</label><br>
+                <input type="text" class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl pl-4" name="description" #inpdes="ngModel"  [(ngModel)]="product.description" required><br>
+            </div>
+            <small class="alert alert-danger" [hidden]="inpdes.valid || inpdes.untouched">
+                Product description required.
+            </small>
+            <div>
+                <label for="exampleFormControlInput1" >category</label><br>
+                <select class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl" [(ngModel)]="product.category" #inpcat="ngModel" name="category">
+                    <option class="text-slate-600 pl-4" value="beauty">beauty</option>
+                    <option class="text-slate-600 pl-4" value="fragrances">fragrances</option>
+                    <option class="text-slate-600 pl-4" value="furniture">furniture</option>
+                    <option class="text-slate-600 pl-4" value="groceries">groceries</option>
+                  </select>
+                <small class="alert alert-danger" [hidden]="inpcat.valid || inpcat.untouched">
+                    Catergory name required.
+                </small>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1">price</label><br>
+                <input type="number" class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl pl-4" name="price" [(ngModel)]="product.price" #inppr="ngModel" min="1" required><br>
+                <div [hidden]="inppr.valid || inppr.untouched">
+                    <small [hidden]="!(inppr.errors?.['min'])" class="text-danger">price should be greater than 0</small>
+                    <small [hidden]="!(inppr.errors?.['required'])" class="text-danger">price is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1">discountPercentage</label><br>
+                <input type="number" class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl pl-4" name="discountPercentage" #inpdis="ngModel" min="0" [(ngModel)]="product.discountPercentage" required><br>
+                <div [hidden]="inpdis.valid || inpdis.untouched">
+                    <small [hidden]="!(inpdis.errors?.['min'])" class="text-danger">discount should be greater than or equal 0</small>
+                    <small [hidden]="!(inpdis.errors?.['required'])" class="text-danger">discount is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" >rating</label><br>
+                <input type="text" class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl pl-4" name=">rating" #inprat="ngModel"  [(ngModel)]="product.rating" required><br>
+            </div>
+            <small class="alert alert-danger" [hidden]="inprat.valid || inprat.untouched">
+                Rating required.
+            </small>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1">stock</label><br>
+                <input type="number" class="w-2xl border-2 border-amber-50 focus:outline-none rounded-2xl pl-4" name="stock" #inpst="ngModel" [(ngModel)]="product.stock" min="1" required><br>
+                <div [hidden]="inpst.valid || inpst.untouched">
+                    <small [hidden]="!(inpst.errors?.['min'])" class="text-danger">stock should be greater than 0</small>
+                    <small [hidden]="!(inpst.errors?.['required'])" class="text-danger">stock is required</small>
+                </div>
+            </div>
+            <label for="exampleFormControlInput1">Image</label>
+            <div class="flex">
+                <input type="file" class="w-2xl border-2 h-8 border-amber-50 focus:outline-none rounded-2xl pl-4 mr-4" (change)="onFileSelected($event)" accept="image/*">
+                @if(selectedItem) {
+                    <img [src]="product.thumbnail" class="rounded-3xl h-12 -mt-1">
+                }
+            </div>
+            <button class="w-2xl bg-amber-50 mt-4 text-slate-800 rounded-3xl mb-20 hover:bg-slate-500" [disabled]="inpForm.invalid">Submit</button>
+            
+        </form>
     </div>
-    <small class="alert alert-danger" [hidden]="inpname.valid || inpname.untouched">
-        Product ID is required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Product Title</label>
-        <input type="text" class="form-control" name="title" [(ngModel)]="product.title" #inptitle="ngModel"required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inptitle.valid || inptitle.untouched">
-        Product Title required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Product description</label>
-        <input type="text" class="form-control" name="description" #inpdes="ngModel"  [(ngModel)]="product.description" required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inpdes.valid || inpdes.untouched">
-        Product description required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Catergory name</label>
-        <input type="text" class="form-control" name="category"  [(ngModel)]="product.category" #inpcat="ngModel" required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inpcat.valid || inpcat.untouched">
-        Catergory name required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">price</label>
-        <input type="number" class="form-control" name="price" [(ngModel)]="product.price" #inppr="ngModel" required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inppr.valid || inppr.untouched">
-        Price required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">discountPercentage</label>
-        <input type="text" class="form-control" name="discountPercentage" #inpdis="ngModel" [(ngModel)]="product.discountPercentage" required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inpdis.valid || inpdis.untouched">
-        Discount required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">rating</label>
-        <input type="text" class="form-control" name=">rating" #inprat="ngModel" [(ngModel)]="product.rating" required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inprat.valid || inprat.untouched">
-        Rating required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">stock</label>
-        <input type="text" class="form-control" name="stock" #inpst="ngModel" [(ngModel)]="product.stock" required>
-    </div>
-    <small class="alert alert-danger" [hidden]="inpst.valid || inpst.untouched">
-        Stock required.
-    </small>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">image</label>
-        <input type="file" class="form-control w-75" (change)="onFileSelected($event)" accept="image/*">
-    </div>
-    <button class="btn btn-dark w-100" [disabled]="inpForm.invalid">Submit</button>
-</form>
+    
+</div>

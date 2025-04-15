@@ -1,13 +1,10 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-export function existEmail():ValidatorFn
+export function existEmail(emails:string[]):ValidatorFn
 {
-   let emails:string[]=[
-    "mariamgappla@gmail.com",
-    "mohra@gmail.com"
-   ]
+   
 return (control:AbstractControl):ValidationErrors|null=>{
     let email=control.get('Email')?.value;
-    let isInclude=emails.find((item)=>item==email)
+    let isInclude=emails.includes(email)
     if(isInclude)
     {
         return { exist: { email: "This email already exists" } }

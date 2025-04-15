@@ -1,0 +1,24 @@
+{
+  "orders": [
+    {
+      "useremail": "shady@gmail.com",
+      "items": [
+        {
+          "productName": "Red Nail Polish",
+          "productimage": "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png",
+          "Quantity": "1",
+          "price": 8.99
+        },
+        {
+          "productName": "Calvin Klein CK One",
+          "productimage": "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/thumbnail.png",
+          "Quantity": "1",
+          "price": 49.99
+        }
+      ],
+      "totalprice": 58.980000000000004,
+      "id": "5e09"
+    }
+    
+  ]
+}

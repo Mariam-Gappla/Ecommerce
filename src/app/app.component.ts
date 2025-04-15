@@ -6,6 +6,8 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './footerComponent/footer/footer.component';
 import { HeaderComponent } from './headerComponent/header/header.component';
 import { ErrorComponent } from './errorComponent/error/error.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,14 @@ import { ErrorComponent } from './errorComponent/error/error.component';
 })
 export class AppComponent {
   title = 'my-angular-app';
-  isErrorPage:boolean=false
+  check:boolean=false;
   checkIfErrorPage(component: any) {
-    this.isErrorPage=component instanceof ErrorComponent;
+    if(component instanceof ErrorComponent || component instanceof LoginComponent || component instanceof SignUpComponent)
+    {
+      this.check=true;
+    }
+    else{
+      this.check=false;
+    }
   }
 }

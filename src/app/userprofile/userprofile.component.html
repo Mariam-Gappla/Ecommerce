@@ -1,0 +1,41 @@
+<div class=" w-full flex items-center justify-center">
+    <div class=" w-full h-180 pl-5 flex flex-col items-center">
+        <div>
+          <p class="mt-20 text-xl ml-3 font-semibold">user name</p>
+          <p class="bg-slate-500 w-100  pl-5 text-white rounded-2xl">{{userprofile?.FullName}}</p>
+        </div>
+        <div>
+            <p class="text-xl ml-3 font-semibold">Email</p>
+            <p class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.Email}}</p>
+        </div>
+        <div>
+            <p class="text-xl ml-3 font-semibold">Age</p>
+            <p class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.Age}}</p>
+        </div>
+          <div>
+            <p class="text-xl ml-3 font-semibold">street</p>
+            <p  class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.address?.street}}</p>
+          </div>
+          <div>
+            <p class="text-xl ml-3 font-semibold">city</p>
+            <p  class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.address?.city}}</p>
+          </div>
+        <div>
+            <p class="text-xl ml-3 font-semibold">Know from</p>
+            @if(userprofile?.referral)
+            {
+                <p class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.referral}}</p>
+            }
+            @else
+            {
+                <p class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.referralothers}}</p>
+            }
+        </div>
+        <div>
+            <p class="text-xl ml-3 font-semibold">Role</p>
+            <p class="bg-slate-500 w-100 pl-5 text-white rounded-2xl">{{userprofile?.role}}</p>
+        </div>
+          <a class="bg-slate-700  w-100 rounded-xl hover:bg-slate-400 mt-3 text-center text-white" [routerLink]="['/SignUp',userprofile?.id]">Edite</a>
+      
+    </div>
+  </div>

@@ -1,25 +1,68 @@
-<nav class="navbar navbar-expand-lg bg-secondary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/products">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/addproduct">Add Product</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/SignUp">SignUp</a>
-                </li>
-            </ul>
+<div class="bg-slate-700 md:h-12 min-w-[260px] z-10">
+        <div class="md:hidden flex justify-end pr-3" (click)="toggleMenu()">
+            <button class="md:hidden text-white text-3xl">
+                &#9776; <!-- هذا هو رمز تلات شرط -->
+              </button>
         </div>
-    </div>
-</nav>
+   @if(isopen==true)
+   {
+    <ul class="flex justify-end items-center flex-col md:flex-row me-4 w-full">
+        <li class="me-6">
+            <a class="text-white text-decoration-none !important" routerLink="/">Login</a>
+        </li>
+        <li class="me-6">
+            <a  class=" text-white text-decoration-none" routerLink="/Landing">Home</a>
+        </li>
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/products">Products</a>
+        </li>
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/orders">orders</a>
+        </li>
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/profile">profile</a>
+        </li>
+        @if(role=='admin')
+        {
+        <li class="me-6">
+            <a class="text-white text-decoration-none" routerLink="/addproduct">Add Product</a>
+        </li>
+        }
+        @if(role=='admin')
+        {
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/Dashboard">Dashboard</a>
+        </li>
+        }
+    </ul>
+   }
+    <ul class="md:flex justify-end items-center flex-col md:flex-row me-4 w-full h-full hidden">
+        <li class="me-6">
+            <a class="text-white text-decoration-none !important" routerLink="/">Login</a>
+        </li>
+        <li class="me-6">
+            <a  class=" text-white text-decoration-none" routerLink="/Landing">Home</a>
+        </li>
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/products">Products</a>
+        </li>
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/orders">orders</a>
+        </li>
+        <li class="me-6">
+            <a class=" text-white text-decoration-none" routerLink="/profile">profile</a>
+        </li>
+        @if(role=='admin')
+        {
+        <li class="me-6">
+            <a class="text-white text-decoration-none" routerLink="/addproduct">Add Product</a>
+        </li>
+        }
+        @if(role=='admin')
+        {
+        <li class="me-3">
+            <a class=" text-white text-decoration-none" routerLink="/Dashboard">Dashboard</a>
+        </li>
+        }
+    </ul>
+</div>

@@ -1,9 +1,25 @@
-<p>product-details works!</p>
-<h1>{{RecivedId}}</h1>
-@if (productDetails!=null) {
-    <h1>{{productDetails!.title}}</h1>
-  } @else {
-    <h1>⚠️ المنتج غير موجود</h1>
-  }
+<div class="min-h-screen flex flex-col">
+  <main class="flex-grow p-4 pb-24">
+    @if (productDetails!=null) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 h-[30%]">
+        <img [src]="productDetails.thumbnail" class="w-xl">
+        <div class="flex flex-col ml-5">
+          <h1 class="mt-20 text-slate-800 text-4xl mb-5">{{productDetails.title}}</h1>
+          <p class="mb-5 text-2xl text-slate-800 w-[80%]" [ngClass]="{'bg-red-600':productDetails.stock==0,'bg-amber-200':productDetails.stock==1}">
+            Quantity: {{productDetails.stock}}
+          </p>
+          <div class="flex">
+            <input type="number" [max]="productDetails.stock" min="1" value="1" class="w-[20%] border-slate-800" #q [disabled]="productDetails.stock==0">
+            <p class="ml-2.5 text-2xl text-slate-800">Price: {{productDetails.price}}</p>
+          </div>
+          <p class="mt-5 text-2xl text-slate-800">Brand: {{productDetails.brand}}</p>
+          <app-button-component (action)="calculatePrice(q.value, productDetails)"></app-button-component>
+        </div>
+      </div>
+    } @else {
+      <h1>⚠️ المنتج غير موجود</h1>
+    }
+  </main>
+</div>
 
 

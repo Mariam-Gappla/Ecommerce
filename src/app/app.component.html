@@ -6,12 +6,12 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-@if(isErrorPage==false)
+@if(check==false)
 {
     <app-header></app-header>
 }
 <router-outlet (activate)="checkIfErrorPage($event)"></router-outlet>
-@if(isErrorPage==false)
+@if(check==false)
 {
     <app-footer></app-footer>
 }

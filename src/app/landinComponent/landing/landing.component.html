@@ -1,6 +1,35 @@
-
-    <img [src]="images[currentIndex]">
-    <button (click)="displayPre()">Prev</button>
-    <button (click)="startSlideshow()">play</button>
-    <button (click)="stop()">stop</button>
-    <button (click)="displayNext()">Next</button>
+<div class="z-1">
+    <img src="makeup.jpg" class="w-full">
+    <div class="text-center">Products</div>
+    
+<div class="grid grid-cols-1 justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    @for (item of prds;track item.id)
+    {
+            <div appShadow class="flex flex-col w-[90%] ml-[5%] items-center pl-2 sm:w-full">
+              <img [src]="item.thumbnail"  alt="...">
+              <div class="card-body">
+                <h5>{{item.title|uppercase}}</h5>
+                <p>{{item.description|sliceWords:11}}</p>
+                <p>Price:{{item.price}}</p>
+                <div class="d-flex justify-content-between mt-3">
+                  @if(role=='admin')
+                  {
+                    <a [routerLink]="['/addproduct',item.id]"><fa-icon [icon]="faEdit" class="fa-2x"></fa-icon></a>
+                    <fa-icon [icon]="faTrash" class="text-slate-800 fa-2x" (click)="deletproduct(item.id)"></fa-icon>
+                    <a [routerLink]="['/products',item.id]"><fa-icon [icon]="faInfoCircle" class="fa-2x"></fa-icon></a>
+                  }
+                  @else{
+                    <a [routerLink]="['/products',item.id]"><fa-icon [icon]="faInfoCircle" class="text-slate-600 fa-2x" style="margin-left: 80px;" ></fa-icon></a>
+                  }
+                  
+                  
+                </div>
+                
+              </div>
+          </div>   
+    }
+    </div>
+    <h3>Total Price:{{productPrice}}</h3>
+    
+    
+</div>

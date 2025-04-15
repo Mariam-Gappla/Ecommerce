@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "4c99",
+      "FullName": "shady kamal",
+      "Email": "shadyy@gmail.com",
+      "Age": 11,
+      "address": {
+        "street": "assuit",
+        "city": "assuit"
+      },
+      "Password": "123",
+      "ConfirmPassword": "123",
+      "referral": "social",
+      "referralothers": null,
+      "role": "admin"
+    }
+  ]
+}
